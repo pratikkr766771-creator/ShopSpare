@@ -991,7 +991,6 @@ export default function App() {
             <span className="serif" style={{ fontSize:14, color:"var(--navy)" }}>ShopSpare</span>
           </div>
           <span>IIT Patna · Capstone-I · Group 75</span>
-          <span>Built with React + Recharts</span>
         </footer>
       </div>
 
