@@ -23,7 +23,7 @@ const GlobalStyles = () => (
     body { font-family: 'DM Sans', sans-serif; background: #f7f6f3; color: #1a1a1a; }
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #f7f6f3; }
-    ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: #000; border-radius: 4px; }
 
     :root {
       --bg: #f7f6f3;
