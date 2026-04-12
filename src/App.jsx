@@ -340,7 +340,7 @@ function Toast({ msg, onClose }) {
 /* ─────────────────────────────────────────
    NAVBAR
 ───────────────────────────────────────── */
-function Nav({ page, setPage, wishlist, onSearch }) {
+function Nav({ page, setPage, prevPage, wishlist, onSearch, goBack }) {
   const [q, setQ] = useState("");
   return (
     <nav className="nav">
@@ -365,7 +365,7 @@ function Nav({ page, setPage, wishlist, onSearch }) {
           />
         </div>
       )}
-<button className="btn btn-ghost btn-icon" onClick={() => window.history.back()}>
+<button className="btn btn-ghost btn-icon" onClick={() => setPage(prevPage || "home")}>
   ←
 </button>
       <div className="nav-tabs hide-mob">
@@ -934,8 +934,25 @@ function DashboardPage({ wishlist, toggleWish, setPage, setSelected, showToast }
 ───────────────────────────────────────── */
 export default function App() {
   const [page, setPage] = useState("home");
+  const [prevPage, setPrevPage] = useState("home"
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(null);
+  const [history, setHistory] = useState([]);
+
+const goTo = (p) => {
+  setHistory(prev => [...prev, page]);
+  setPage(p);
+};
+
+const goBack = () => {
+  if (history.length > 0) {
+    const prev = history[history.length - 1];
+    setHistory(h => h.slice(0, -1));
+    setPage(prev);
+  } else {
+    setPage("home");
+  }
+};
   const [wishlist, setWishlist] = useState([1, 3]);
   const [toast, setToast] = useState(null);
 
@@ -947,16 +964,17 @@ export default function App() {
     setTimeout(() => setToast(null), 2800);
   };
 
-  const handleSearch = (q) => {
-    setQuery(q);
-    setPage("results");
-  };
+  const goTo = (p) => { setPrevPage(page); setPage(p); };
+const handleSearch = (q) => {
+  setQuery(q);
+  goTo("results");
+};
 
   return (
     <>
       <GlobalStyles />
       <div style={{ minHeight:"100vh", display:"flex", flexDirection:"column" }}>
-        <Nav page={page} setPage={setPage} wishlist={wishlist} onSearch={handleSearch} />
+        <Nav page={page} setPage={setPage} wishlist={wishlist} onSearch={handleSearch} goBack={goBack} />
         <main style={{ flex:1 }}>
           {page === "home" && (
             <HomePage setPage={setPage} setQuery={setQuery} setSelected={setSelected} />
