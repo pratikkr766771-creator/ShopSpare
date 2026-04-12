@@ -365,7 +365,7 @@ function Nav({ page, setPage, prevPage, wishlist, onSearch, goBack }) {
           />
         </div>
       )}
-<button className="btn btn-ghost btn-icon" onClick={() => setPage(prevPage || "home")}>
+<button className="btn btn-ghost btn-icon" onClick={goBack}>
   ←
 </button>
       <div className="nav-tabs hide-mob">
