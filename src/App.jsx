@@ -365,7 +365,9 @@ function Nav({ page, setPage, wishlist, onSearch }) {
           />
         </div>
       )}
-
+<button className="btn btn-ghost btn-icon" onClick={() => window.history.back()}>
+  ←
+</button>
       <div className="nav-tabs hide-mob">
         {[["home","Home"],["results","Search"],["compare","Compare"],["dashboard","Dashboard"]].map(([k,label])=>(
           <button key={k} className={`nav-tab ${page===k?"active":""}`} onClick={()=>setPage(k)}>
